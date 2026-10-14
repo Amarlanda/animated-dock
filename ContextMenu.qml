@@ -2,6 +2,7 @@
 import QtQuick
 import Quickshell
 import Quickshell.Hyprland
+import qs.Commons as Commons
 import qs.Commons
 import qs.Ui
 
@@ -144,7 +145,7 @@ PopupWindow {
   color: "transparent"
 
   readonly property int pad: Style.spacing.sm
-  readonly property var menuBorder: Border.surfaceSpec("popups", "border", Color.popups.border, Math.max(1, Style.space(2)))
+  readonly property var menuBorder: Border.surfaceSpec("popups", "border", Commons.Color.popups.border, Math.max(1, Style.space(2)))
 
   FontMetrics {
     id: fm
@@ -208,7 +209,7 @@ PopupWindow {
     id: card
     anchors.fill: parent
     radius: Math.min(menu.dock.cardRadius, Style.cornerRadius)
-    color: Util.alpha(Color.popups.background, 0.97)
+    color: Util.alpha(Commons.Color.popups.background, 0.97)
     borderSpec: menu.menuBorder
 
     Column {
@@ -237,14 +238,14 @@ PopupWindow {
             x: Style.spacing.md
             width: parent.width - Style.spacing.md * 2
             height: 1
-            color: Util.alpha(Color.popups.text, 0.2)
+            color: Util.alpha(Commons.Color.popups.text, 0.2)
           }
 
           Rectangle {
             visible: rowHover.hovered && !row.isSep
             anchors.fill: parent
             radius: Math.max(2, Math.round(Style.cornerRadius / 2))
-            color: Util.alpha(Color.accent, 0.16)
+            color: Util.alpha(Commons.Color.accent, 0.16)
           }
 
           Text {
@@ -252,7 +253,7 @@ PopupWindow {
             x: Style.spacing.lg
             anchors.verticalCenter: parent.verticalCenter
             text: row.modelData.glyph || ""
-            color: rowHover.hovered ? Color.accent : Util.alpha(Color.popups.text, row.modelData.dim ? 0.6 : 1)
+            color: rowHover.hovered ? Commons.Color.accent : Util.alpha(Commons.Color.popups.text, row.modelData.dim ? 0.6 : 1)
             font.family: Style.font.resolvedFamily
             font.pixelSize: Style.font.bodySmall
           }
@@ -262,7 +263,7 @@ PopupWindow {
             x: Style.spacing.lg + menu.glyphColumn
             anchors.verticalCenter: parent.verticalCenter
             text: row.modelData.label || ""
-            color: rowHover.hovered ? Color.accent : Util.alpha(Color.popups.text, row.modelData.dim ? 0.6 : 1)
+            color: rowHover.hovered ? Commons.Color.accent : Util.alpha(Commons.Color.popups.text, row.modelData.dim ? 0.6 : 1)
             font.family: Style.font.resolvedFamily
             font.pixelSize: Style.font.bodySmall
             elide: Text.ElideRight

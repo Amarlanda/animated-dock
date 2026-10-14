@@ -1,4 +1,5 @@
 import QtQuick
+import qs.Commons as Commons
 import qs.Commons
 import qs.Ui
 
@@ -130,7 +131,7 @@ Item {
     anchors.centerIn: parent
     width:  cell.dock.vertical ? Math.round(cell.dock.slot * 0.6) : cell.dock.ruleWidth
     height: cell.dock.vertical ? cell.dock.ruleWidth : Math.round(cell.dock.slot * 0.6)
-    color: Util.alpha(Color.popups.text, cell.isDivider ? 0.4 : 0.25)
+    color: Util.alpha(Commons.Color.popups.text, cell.isDivider ? 0.4 : 0.25)
   }
 
   // Tile and artwork share one parent so the fisheye scale moves them
@@ -186,7 +187,7 @@ Item {
       visible: cell.dock.tiles
       anchors.fill: parent
       radius: cell.dock.tileRadiusPx
-      color: Util.alpha(Color.popups.text, cell.dock.tileOpacity)
+      color: Util.alpha(Commons.Color.popups.text, cell.dock.tileOpacity)
       borderSpec: Border.none()
     }
 
@@ -199,7 +200,7 @@ Item {
       visible: cell.glyph !== ""
       anchors.centerIn: parent
       text: cell.glyph
-      color: iconHover.hovered ? Color.accent : cell.dock.glyphColor
+      color: iconHover.hovered ? Commons.Color.accent : cell.dock.glyphColor
       Behavior on color { ColorAnimation { duration: 120 } }
       opacity: cell.dock.iconOpacity
       font.family: Style.font.resolvedFamily
@@ -218,7 +219,7 @@ Item {
       // Oversampled so the fisheye scale stays crisp on raster icons.
       sourceOversample: cell.dock.slot * 2
       tinted: cell.tinted
-      ink: iconHover.hovered ? Color.accent : cell.dock.glyphColor
+      ink: iconHover.hovered ? Commons.Color.accent : cell.dock.glyphColor
     }
   }
 
@@ -361,14 +362,14 @@ Item {
     anchors.top: art.top
     anchors.rightMargin: Math.round(-width * 0.2)
     anchors.topMargin: Math.round(-height * 0.2)
-    color: pinHover.hovered ? Color.accent : Util.alpha(Color.accent, 0.9)
+    color: pinHover.hovered ? Commons.Color.accent : Util.alpha(Commons.Color.accent, 0.9)
     border.width: 1
-    border.color: Color.popups.background
+    border.color: Commons.Color.popups.background
 
     Text {
       anchors.centerIn: parent
       text: "󰐃"
-      color: Color.popups.background
+      color: Commons.Color.popups.background
       font.family: Style.font.resolvedFamily
       font.pixelSize: Math.round(parent.width * 0.62)
     }
@@ -411,7 +412,7 @@ Item {
     width:  cell.dock.vertical ? across : along
     height: cell.dock.vertical ? along : across
     radius: line ? 1 : 3
-    color: focused ? Color.accent : Util.alpha(Color.accent, 0.45)
+    color: focused ? Commons.Color.accent : Util.alpha(Commons.Color.accent, 0.45)
     Behavior on color { ColorAnimation { duration: 140 } }
   }
 
@@ -430,15 +431,15 @@ Item {
     anchors.top: art.top
     anchors.rightMargin: Math.round(-height * 0.2)
     anchors.topMargin: Math.round(-height * 0.2)
-    color: Color.accent
+    color: Commons.Color.accent
     border.width: 1
-    border.color: Color.popups.background
+    border.color: Commons.Color.popups.background
 
     Text {
       id: countText
       anchors.centerIn: parent
       text: cell.wins.length
-      color: Color.popups.background
+      color: Commons.Color.popups.background
       font.family: Style.font.resolvedFamily
       font.pixelSize: Math.round(parent.height * 0.68)
       font.bold: true

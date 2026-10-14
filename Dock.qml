@@ -3,6 +3,7 @@ import Quickshell
 import Quickshell.Io
 import Quickshell.Wayland
 import Quickshell.Hyprland
+import qs.Commons as Commons
 import qs.Commons
 import qs.Ui
 
@@ -207,10 +208,10 @@ Item {
   readonly property real borderOpacity: fraction("borderOpacity", 1.0)
   readonly property var dockBorder: flag("border", true)
     ? (root.borderOpacity < 1
-      ? withBorderOpacity(Border.surfaceSpec("popups", "border", Color.popups.border, Math.max(1, Style.space(2))), root.borderOpacity)
-      : Border.surfaceSpec("popups", "border", Color.popups.border, Math.max(1, Style.space(2))))
+      ? withBorderOpacity(Border.surfaceSpec("popups", "border", Commons.Color.popups.border, Math.max(1, Style.space(2))), root.borderOpacity)
+      : Border.surfaceSpec("popups", "border", Commons.Color.popups.border, Math.max(1, Style.space(2))))
     : Border.none()
-  readonly property var tipBorder: Border.surfaceSpec("tooltip", "border", Color.tooltip.border, Math.max(1, Style.space(1)))
+  readonly property var tipBorder: Border.surfaceSpec("tooltip", "border", Commons.Color.tooltip.border, Math.max(1, Style.space(1)))
 
   // Re-index the spec's colours with a forced alpha on the flat fill; a
   // gradient keeps its stops, each tinted to the same opacity. Rectangle.border
@@ -770,7 +771,7 @@ Item {
   readonly property real backgroundOpacity: fraction("backgroundOpacity", 1.0)
   readonly property real iconOpacity: fraction("iconOpacity", 1.0)
 
-  readonly property color glyphColor: root.config.glyphColor === "accent" ? Color.accent : Color.popups.text
+  readonly property color glyphColor: root.config.glyphColor === "accent" ? Commons.Color.accent : Commons.Color.popups.text
 
   // Corner rounding for the card: "rounded" (theme rounding, or an explicit
   // cornerRadius px value), "square" (sharp, radius 0) or "pill" (fully
@@ -1528,7 +1529,7 @@ Item {
           radius: root.cardRadius
           // The popup surface, not the raw palette background: a theme that
           // tints its popups should tint the dock the same way.
-          color: Util.alpha(Color.popups.background, root.backgroundOpacity)
+          color: Util.alpha(Commons.Color.popups.background, root.backgroundOpacity)
           borderSpec: root.dockBorder
 
           opacity: dockWindow.shown ? 1 : 0
@@ -1582,14 +1583,14 @@ Item {
         x: root.vertical ? across : along
         y: root.vertical ? along : across
         radius: Math.min(root.cardRadius, Math.round(root.labelHeight / 2))
-        color: Util.alpha(Color.background, 0.97)
+        color: Util.alpha(Commons.Color.background, 0.97)
         borderSpec: root.tipBorder
 
         Text {
           id: tipText
           anchors.centerIn: parent
           text: root.hoveredLabel
-          color: Color.tooltip.text
+          color: Commons.Color.tooltip.text
           font.family: Style.font.resolvedFamily
           font.pixelSize: Style.font.bodySmall
         }

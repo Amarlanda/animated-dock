@@ -1,6 +1,7 @@
 import QtQuick
 import Quickshell
 import Quickshell.Hyprland
+import qs.Commons as Commons
 import qs.Commons
 import qs.Ui
 
@@ -84,7 +85,7 @@ PopupWindow {
 
   readonly property int pad: Style.spacing.md
   readonly property int contentWidth: Style.space(300)
-  readonly property var settingsBorder: Border.surfaceSpec("popups", "border", Color.popups.border, Math.max(1, Style.space(2)))
+  readonly property var settingsBorder: Border.surfaceSpec("popups", "border", Commons.Color.popups.border, Math.max(1, Style.space(2)))
 
   implicitWidth: contentWidth + pad * 2 + Border.left(settingsBorder) + Border.right(settingsBorder)
   // Pinned to the implicit width so a live value label ("42 px") can never
@@ -128,7 +129,7 @@ PopupWindow {
     id: card
     anchors.fill: parent
     radius: settings.lockRadius
-    color: Util.alpha(Color.popups.background, 0.97)
+    color: Util.alpha(Commons.Color.popups.background, 0.97)
     borderSpec: settings.settingsBorder
 
     Column {
@@ -146,7 +147,7 @@ PopupWindow {
           width: settings.contentWidth - Style.space(40) - Style.spacing.md
           anchors.verticalCenter: parent.verticalCenter
           text: "Dock Settings"
-          color: Color.popups.text
+          color: Commons.Color.popups.text
           font.family: Style.font.resolvedFamily
           font.pixelSize: Style.font.body
           font.bold: true
@@ -159,8 +160,8 @@ PopupWindow {
           fontSize: Style.font.body
           horizontalPadding: Style.spacing.controlPaddingX
           verticalPadding: Style.spacing.controlPaddingY
-          foreground: Color.popups.text
-          accent: Color.accent
+          foreground: Commons.Color.popups.text
+          accent: Commons.Color.accent
           onClicked: settings.close()
         }
       }
@@ -176,7 +177,7 @@ PopupWindow {
           Text {
             anchors.verticalCenter: parent.verticalCenter
             text: "Icon Size"
-            color: Color.popups.text
+            color: Commons.Color.popups.text
             font.family: Style.font.resolvedFamily
             font.pixelSize: Style.font.bodySmall
           }
@@ -184,7 +185,7 @@ PopupWindow {
           Text {
             anchors.verticalCenter: parent.verticalCenter
             text: String(Math.round(sizeSlider.liveValue)) + " px"
-            color: Util.alpha(Color.popups.text, 0.6)
+            color: Util.alpha(Commons.Color.popups.text, 0.6)
             font.family: Style.font.resolvedFamily
             font.pixelSize: Style.font.caption
           }
@@ -198,8 +199,8 @@ PopupWindow {
           step: 2
           integer: true
           value: settings.dock.num("iconSize", 44)
-          fillColor: Color.accent
-          knobColor: Color.accent
+          fillColor: Commons.Color.accent
+          knobColor: Commons.Color.accent
           onReleased: function(v) {
             settings.dock.applySetting("iconSize", String(Math.round(v)))
           }
@@ -212,8 +213,8 @@ PopupWindow {
         label: "Auto-hide"
         description: "Slide the dock off-screen until the edge is brushed."
         checked: settings.dock.flag("autohide", true)
-        foreground: Color.popups.text
-        accent: Color.accent
+        foreground: Commons.Color.popups.text
+        accent: Commons.Color.accent
         onClicked: settings.dock.applySetting("autohide", String(!settings.dock.flag("autohide", true)))
       }
 
@@ -223,8 +224,8 @@ PopupWindow {
         label: "Border"
         description: "Outline around the dock card."
         checked: settings.dock.flag("border", true)
-        foreground: Color.popups.text
-        accent: Color.accent
+        foreground: Commons.Color.popups.text
+        accent: Commons.Color.accent
         onClicked: settings.dock.applySetting("border", String(!settings.dock.flag("border", true)))
       }
 
@@ -239,7 +240,7 @@ PopupWindow {
           Text {
             anchors.verticalCenter: parent.verticalCenter
             text: "Border opacity"
-            color: Color.popups.text
+            color: Commons.Color.popups.text
             font.family: Style.font.resolvedFamily
             font.pixelSize: Style.font.bodySmall
           }
@@ -247,7 +248,7 @@ PopupWindow {
           Text {
             anchors.verticalCenter: parent.verticalCenter
             text: Math.round(borderOpacitySlider.liveValue) + "%"
-            color: Util.alpha(Color.popups.text, 0.6)
+            color: Util.alpha(Commons.Color.popups.text, 0.6)
             font.family: Style.font.resolvedFamily
             font.pixelSize: Style.font.caption
           }
@@ -261,8 +262,8 @@ PopupWindow {
           step: 5
           integer: true
           value: Math.round(settings.dock.fraction("borderOpacity", 1.0) * 100)
-          fillColor: Color.accent
-          knobColor: Color.accent
+          fillColor: Commons.Color.accent
+          knobColor: Commons.Color.accent
           onReleased: function(v) {
             settings.dock.applySetting("borderOpacity", String(v / 100))
           }
@@ -280,7 +281,7 @@ PopupWindow {
           Text {
             anchors.verticalCenter: parent.verticalCenter
             text: "Background opacity"
-            color: Color.popups.text
+            color: Commons.Color.popups.text
             font.family: Style.font.resolvedFamily
             font.pixelSize: Style.font.bodySmall
           }
@@ -288,7 +289,7 @@ PopupWindow {
           Text {
             anchors.verticalCenter: parent.verticalCenter
             text: Math.round(bgOpacitySlider.liveValue) + "%"
-            color: Util.alpha(Color.popups.text, 0.6)
+            color: Util.alpha(Commons.Color.popups.text, 0.6)
             font.family: Style.font.resolvedFamily
             font.pixelSize: Style.font.caption
           }
@@ -302,8 +303,8 @@ PopupWindow {
           step: 5
           integer: true
           value: Math.round(settings.dock.fraction("backgroundOpacity", 1.0) * 100)
-          fillColor: Color.accent
-          knobColor: Color.accent
+          fillColor: Commons.Color.accent
+          knobColor: Commons.Color.accent
           onReleased: function(v) {
             settings.dock.applySetting("backgroundOpacity", String(v / 100))
           }
@@ -317,7 +318,7 @@ PopupWindow {
         Text {
           width: settings.contentWidth
           text: "Position"
-          color: Color.popups.text
+          color: Commons.Color.popups.text
           font.family: Style.font.resolvedFamily
           font.pixelSize: Style.font.bodySmall
         }
@@ -330,9 +331,9 @@ PopupWindow {
             { value: "right", label: "Right" }
           ]
           value: settings.dock.edge
-          foreground: Color.popups.text
-          background: Color.popups.background
-          accent: Color.accent
+          foreground: Commons.Color.popups.text
+          background: Commons.Color.popups.background
+          accent: Commons.Color.accent
           onChanged: function(v) {
             settings.dock.applySetting("edge", JSON.stringify(String(v)))
           }
@@ -345,8 +346,8 @@ PopupWindow {
         label: "Full length"
         description: "Span the whole edge of the screen."
         checked: settings.dock.flag("fullWidth", false)
-        foreground: Color.popups.text
-        accent: Color.accent
+        foreground: Commons.Color.popups.text
+        accent: Commons.Color.accent
         onClicked: settings.dock.applySetting("fullWidth", String(!settings.dock.flag("fullWidth", false)))
       }
 
@@ -357,7 +358,7 @@ PopupWindow {
         Text {
           width: settings.contentWidth
           text: "Corner Shape"
-          color: Color.popups.text
+          color: Commons.Color.popups.text
           font.family: Style.font.resolvedFamily
           font.pixelSize: Style.font.bodySmall
         }
@@ -369,9 +370,9 @@ PopupWindow {
             { value: "pill", label: "Pill" }
           ]
           value: settings.dock.cornerShape
-          foreground: Color.popups.text
-          background: Color.popups.background
-          accent: Color.accent
+          foreground: Commons.Color.popups.text
+          background: Commons.Color.popups.background
+          accent: Commons.Color.accent
           onChanged: function(v) {
             settings.dock.applySetting("cornerShape", JSON.stringify(String(v)))
           }
@@ -384,8 +385,8 @@ PopupWindow {
         label: "Show icon name on hover"
         description: "Show the icon's name when hovering over it."
         checked: settings.dock.flag("tooltips", true)
-        foreground: Color.popups.text
-        accent: Color.accent
+        foreground: Commons.Color.popups.text
+        accent: Commons.Color.accent
         onClicked: settings.dock.applySetting("tooltips", String(!settings.dock.flag("tooltips", true)))
       }
 
@@ -396,7 +397,7 @@ PopupWindow {
         Text {
           width: settings.contentWidth
           text: "Support"
-          color: Color.popups.text
+          color: Commons.Color.popups.text
           font.family: Style.font.resolvedFamily
           font.pixelSize: Style.font.bodySmall
         }
@@ -405,8 +406,8 @@ PopupWindow {
           width: settings.contentWidth
           iconText: "☕"
           text: "Support me on Ko-fi"
-          foreground: Color.popups.text
-          accent: Color.accent
+          foreground: Commons.Color.popups.text
+          accent: Commons.Color.accent
           onClicked: {
             settings.close()
             Util.execDetached("xdg-open https://ko-fi.com/davedes")
